@@ -1,1 +1,40 @@
 /* You can add global styles to this file, and also import other style files */
+@import "~@angular/material/prebuilt-themes/deeppurple-amber.css";
+@import '~bootstrap/dist/css/bootstrap.min.css';
+body {
+  margin: 0;
+  font-family: sans-serif;
+}
+
+.expanded-toolbar {
+  justify-content: space-between;
+}
+
+
+mat-form-field {
+  width: 100%;
+}
+
+.row {
+  margin: 0;
+}
+
+.edit-button {
+  top: 0;
+  left: 45px;
+  position: absolute;
+}
+.delete-button {
+  top: 0;
+  left: 80px;
+  position: absolute;
+}
+
+button {
+  background: no-repeat;
+  border: none;
+}
+
+form {
+  padding: 20px 0 20px 20px;
+}

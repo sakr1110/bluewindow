@@ -1,0 +1,113 @@
+<div class="row" style="margin-top: 40px;" *ngFor="let item of brandsList | keyvalue">
+  <div class="col-md-12">
+    <h5>{{item.key}}</h5>
+    <button class="edit-button" (click)="edit(item)">
+      <mat-icon>edit</mat-icon>
+    </button>
+    <button class="delete-button" (click)="delete(item)">
+      <mat-icon>delete</mat-icon>
+    </button>
+  </div>
+
+  <div class="col-md-12">
+    <table mat-table [dataSource]="item.value" class="mat-elevation-z8">
+      <ng-container matColumnDef="id">
+        <th mat-header-cell *matHeaderCellDef> ID </th>
+        <td mat-cell *matCellDef="let element"> {{element.BRAND_ID}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="brand_name">
+        <th mat-header-cell *matHeaderCellDef> Brand Name </th>
+        <td mat-cell *matCellDef="let element"> {{element.BRAND_NAME}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="brand_description">
+        <th mat-header-cell *matHeaderCellDef> Brand Description </th>
+        <td mat-cell *matCellDef="let element"> {{element.BRAND_DESCRIPTION}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="rating">
+        <th mat-header-cell *matHeaderCellDef> Rating </th>
+        <td mat-cell *matCellDef="let element"> {{element.RATING}} </td>
+      </ng-container>
+
+      <!-- actions Column -->
+      <ng-container matColumnDef="actions">
+        <th mat-header-cell *matHeaderCellDef> Actions </th>
+        <td mat-cell *matCellDef="let element">
+          <button (click)="deletebrandfromlist(element)">
+            <mat-icon>delete</mat-icon>
+          </button>
+          <button (click)="editbrandfromlist(element)">
+            <mat-icon>edit</mat-icon>
+          </button>
+        </td>
+      </ng-container>
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+  </div>
+</div>
+
+
+
+<div class="row" *ngIf="showEditCountrySection">
+  <div class="col-md-12">
+    <form [formGroup]="countryForm" (ngSubmit)="submitCountryForm()">
+      <h5>Edit Brand List Country</h5>
+      <div class="row">
+        <div class="col-md-4">
+          <mat-form-field appearance="fill" class=" example-full-width">
+            <mat-label>Country</mat-label>
+            <mat-select formControlName="country" name="Country">
+              <mat-option *ngFor="let country of country_codes" [value]="country">
+                {{country}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-4">
+          <div class="button-wrapper">
+            <button mat-flat-button color="primary" [disabled]="countryForm.invalid">Submit</button>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+
+
+<div class="row" *ngIf="showEditBrandSection">
+  <div class="col-md-12">
+    <form [formGroup]="brandListForm" (ngSubmit)="submitBrandListForm()">
+      <h5>Edit Brand</h5>
+      <div class="row">
+        <div class="col-md-4">
+          <mat-form-field appearance="fill" class="example-full-width">
+            <mat-label>Brand Name</mat-label>
+            <mat-select formControlName="brand" name="brand" disabled>
+              <mat-option *ngFor="let brand of brands" [value]="brand.ID">
+                {{brand.NAME}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+        <div class="col-md-4">
+          <mat-form-field appearance="fill" class="example-full-width">
+            <mat-label>Rating</mat-label>
+            <input matInput type="number" max="100" min="0" formControlName="rating">
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-4">
+          <div class="button-wrapper">
+            <button mat-flat-button color="primary" [disabled]="brandListForm.invalid">Submit</button>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
